@@ -1,0 +1,23 @@
+services:
+  rabbit:
+    image: rabbitmq:${RABBITMQ_VERSION:-3.8.4}-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "rabbitmqctl status || exit 1"]
+  producer:
+    build: .
+    image: mq-prefetch-test
+    depends_on:
+      rabbit:
+        condition: service_healthy
+        restart: true
+    command: ["ruby", "producer.rb"]
+  consumer:
+    image: mq-prefetch-test
+    depends_on:
+     - producer
+    command: ["ruby", "consumer.rb"]
+    deploy:
+      replicas: 3
