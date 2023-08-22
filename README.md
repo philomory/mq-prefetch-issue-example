@@ -3,15 +3,14 @@
 Demonstrates an issue prefetch and delivery-limit in certain versions of
 RabbitMQ.
 
-Affected versions: 3.8.4 through 3.10.25
-Fixed in: 3.11.0
+* Affected versions: 3.8.4 through 3.10.25
+* Fixed in: 3.11.0
 
 # Usage
 
-To run the reproduction on RabbitMQ 3.8.4, run `docker compose up --force-recreate`
-
-To run the reproduction on some other version, run
-`RABBITMQ_VERSION=3.10.25 docker compose up --force-recreate`
+* To run the reproduction on RabbitMQ 3.8.4, run `docker compose up --force-recreate`
+* To run the reproduction on some other version, run e.g.
+  `RABBITMQ_VERSION=3.10.25 docker compose up --force-recreate`
 
 # Observing the issue
 Once all 5 containers are running, visit http://localhost:15672 and log in
